@@ -1,0 +1,6 @@
+# config/cucumber.yml
+##YAML Template
+---
+default: --profile html_report --retry 2
+html_report: --format progress --format html --out=./testResults/features_report.html  
+tag: --tags @firstSearch
