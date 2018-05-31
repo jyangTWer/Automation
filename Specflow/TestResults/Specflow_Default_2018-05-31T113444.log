@@ -1,0 +1,23 @@
+﻿2018-05-31T11:34:43.7249031+08:00;VSTestExecutionThread;Info;SpecFlow+Runner execution started
+2018-05-31T11:34:43.9988503+08:00;VSTestExecutionThread;Info;SpecRun Evaluation Mode: Please purchase at http://www.specflow.org/plus to remove test execution delay.
+2018-05-31T11:34:43.9988503+08:00;VSTestExecutionThread;Info;SpecRun: running tests in Z:\Projects\WebAutomation\Specflow\Specflow\Specflow\bin\Debug\Specflow.dll
+2018-05-31T11:34:43.9988503+08:00;VSTestExecutionThread;Info;Profile: Default
+2018-05-31T11:34:57.3758178+08:00;Thread#14;Info;Discovering target: Default
+2018-05-31T11:34:57.3817225+08:00;Thread#14;Info;Discovering tests from assembly: Z:\Projects\WebAutomation\Specflow\Specflow\Specflow\bin\Debug\Specflow.dll
+Appdomain Disposed
+Test Suite Dump
+#0: Specflow/Default - 
+End: Test Suite Dump
+Thread#0:Scheduler: get next test for thread 0
+Thread#:Scheduler: at the end of normal test queue
+Thread#0:Scheduler: enumerator for thread is at end
+Thread#0:Scheduler: No more tests for thread
+Thread#-1:Scheduler: get next test for thread -1
+Thread#:Scheduler: at the end of normal test queue
+Thread#-1:Scheduler: enumerator for thread is at end
+Total: 0
+Succeeded: 0
+Ignored: 0
+Pending: 0
+Skipped: 0
+Failed: 0
