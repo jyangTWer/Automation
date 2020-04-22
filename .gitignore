@@ -1,4 +1,6 @@
 Cucumber/.DS_Store
 Specflow/.vs
 Specflow/.DS_Store
-Cucumber/testResults/*
+Cucumber/testResults
+cypress/cypress/integration/examples
+cypress/node_modules
