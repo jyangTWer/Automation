@@ -10,9 +10,18 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
+Cypress.Commands.add("login", (email, password, message) => {
+  cy.get('input[name="name"]').type(email);
+  cy.get('input[name="email"]').type(password);
+  cy.get("textarea").type(message);
+
+  cy.server();
+  cy.route("POST", "/users/**", { status: "Form saved!", code: 201 });
+
+  cy.get("form").submit();
+})
+
+
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
 //

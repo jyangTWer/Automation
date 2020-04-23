@@ -1,9 +1,7 @@
-import HomePage from './pages/HomePage';
-
 describe("Form test", () => {
   it("Can fill the form", () => {
-    const home = new HomePage();
-    home.signIn();
-    home.contains("Form saved!");
+    cy.visit('/');
+    cy.login("Molly", "molly@dev.dev", "Mind you if I ask some silly question?")
+    cy.contains("Form saved!");
   });
 });
