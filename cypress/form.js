@@ -12,7 +12,7 @@ document.addEventListener("formdata", event => {
   request.open("POST", "https://jsonplaceholder.typicode.com/users/");
   request.send(jsonBody);
   request.onload = function() {
-    const jsaonResponse = JSON.parse(this.response);
+    const jsonResponse = JSON.parse(this.response);
     document.body.innerHTML += `Response from the server: ${jsonResponse.status}`;
   };
 });
