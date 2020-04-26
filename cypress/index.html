@@ -23,7 +23,16 @@
           <button type="submit">SEND</button>
         </div>
       </form>
+      <div class="random-number-example">
+        Random number: <span id="random-number">🎁</span>
+      </div>
     </main>
   </body>
   <script src="form.js"></script>
+  <script>
+    const el = document.getElementById('random-number')
+    setTimeout(() => {
+      el.innerText = Math.floor(Math.random() * 10 + 1)
+    }, 1500)
+  </script>
 </html>

@@ -11,9 +11,9 @@
 //
 // -- This is a parent command --
 Cypress.Commands.add("login", (email, password, message) => {
-  cy.get('input[name="name"]').type(email);
-  cy.get('input[name="email"]').type(password);
-  cy.get("textarea").type(message);
+  cy.get('input[name="name"]').type(email).should("have.value", email);
+  cy.get('input[name="email"]').type(password).should("have.value", password);
+  cy.get("textarea").type(message).should("have.value", message);
 
   cy.server();
   cy.route("POST", "/users/**", { status: "Form saved!", code: 201 });
