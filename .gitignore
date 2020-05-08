@@ -4,3 +4,4 @@ Specflow/.DS_Store
 Cucumber/testResults
 cypress/cypress/integration/examples
 cypress/node_modules
+cypress/cypress-example-todomvc
