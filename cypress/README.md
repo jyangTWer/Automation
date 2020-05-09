@@ -92,8 +92,11 @@ cy.get('.todo-list li')     // command
 ```
 并行线程
 * Tag用例管理
-* CI/CD流水线
-* 生成测试报告
+
+## CI/CD流水线
+测试在CI上集成核心是**命令行运行走天下**，其实跟在本地跑没有区别，额外需要了解的知识就是一些CI的基础理论知识，另外，有的测试代码也是需要编译和构建的，相对麻烦些，cypress和其他js类型的自动化框架没有这个问题。[这里](https://docs.cypress.io/guides/guides/continuous-integration.html#Examples)的几个流行CI工具的yaml文件中可以看出，在运行测试的时候，都是用的**$(npm bin)/cypress run --record**命令。
+
+**注意** 如果使用cypress特有的application action的方式写测试，需要注意前端打包代码时，在部署非生产环境时要把测试代码也打进去，不建议把测试代码打包带入到生产环境。
 
 ## 生成测试报告
 [参考](https://medium.com/egnyte-engineering/3-steps-to-awesome-test-reports-with-cypress-f4fe915bc246)
