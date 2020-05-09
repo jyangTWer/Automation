@@ -66,9 +66,30 @@
   ```
   时间就是1m39s，速度上还是有很大差异的。
 
-* [重试机制](https://docs.cypress.io/guides/core-concepts/retry-ability.html), 行为和断言里已经内嵌了重试的机制。
-行为和断言两种，跟在行为后的断言如果成功就立即结束，如果断言未成功，重试之前的行为（除了可能会潜在改变应用状态的行为，如click这种），直到断言成功或者之前的行为超时（超时的默认时间是4s，可设置）失败结束。
-多个行为后紧跟一个断言时且断言失败时，只重复最后一个行为，参见文章中例子，解决方法：1）合并行为 2）每个行为后紧跟断言验证 3）若之前的行为是不可重试的，如then，可以使用.should(callback)的方式解决。
+## [重试机制](https://docs.cypress.io/guides/core-concepts/retry-ability.html)
+1. 在cypress中，行为和断言里已经内嵌了重试的机制，跟在行为后的断言如果成功就立即结束，如果断言未成功，重试之前的行为（除了可能会潜在改变应用状态的行为，如click这种），直到断言成功或者之前的行为超时（超时的默认时间是4s，可设置）失败结束。
+```
+cy.get('.todo-list li')     // command
+  .should('have.length', 2) // assertion
+```
+
+2. 多个行为后紧跟一个断言时且断言失败时，只重复最后一个行为
+```
+cy.get('.todo-list li')         // queries immediately, finds 1 <li>
+.find('label')                // retried, retried, retried with 1 <li>
+.should('contain', 'todo B')  // never succeeds with only 1st <li>
+```
+所以，推荐 1）合并行为， 2）如果不想合并行为，那就在每个行为后增加断言验证 3）若之前的行为是不可重试的，如then，可以使用.should(callback)把不能重试的行为包在回调里，然后把should断言放在一个可重试的命令之后，达到retry的目的。
+3. 一个行为后跟多个断言时，如A，B，C，如果B断言失败，则会重试那个命令及之后成功的A和B，C只有B成功后才会执行。
+```
+cy.get('.todo-list li')     // command
+  .should('have.length', 2) // assertion     A
+  .and(($li) => {
+    // 2 more assertions
+    expect($li.get(0).textContent, 'first item').to.equal('todo a')    //B
+    expect($li.get(1).textContent, 'second item').to.equal('todo B')   //C
+  })
+```
 并行线程
 * Tag用例管理
 * CI/CD流水线
