@@ -4,12 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "e2e": "cypress open",
+    "cy:run": "cypress run --spec 'cypress/integration/*.spec.js'",
+    "report:merge": "mochawesome-merge cypress/results/json/*.json > cypress/results/mochawesome-bundle.json",
+    "report:generate": "marge cypress/results/mochawesome-bundle.json -o cypress/reports/html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jing Yang",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^4.4.1"
+    "cypress": "^4.4.1",
+    "cypress-multi-reporters": "^1.2.4",
+    "mocha": "^7.1.2",
+    "mochawesome": "^6.1.1",
+    "mochawesome-merge": "^4.0.3",
+    "mochawesome-report-generator": "^5.1.0"
   }
 }

@@ -5,3 +5,6 @@ Cucumber/testResults
 cypress/cypress/integration/examples
 cypress/node_modules
 cypress/cypress-example-todomvc
+cypress/cypress/reports/
+cypress/cypress/results/
+cypress/cypress/videos/

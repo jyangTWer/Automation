@@ -73,3 +73,12 @@
 * Tag用例管理
 * CI/CD流水线
 * 生成测试报告
+
+## 生成测试报告
+[参考](https://medium.com/egnyte-engineering/3-steps-to-awesome-test-reports-with-cypress-f4fe915bc246)
+
+cypress是基于mocha的，所以mocha可以用的reporter，cypress都可以用，对于E2E来说，漂亮的report也是挺必要的，不过也得看CI对生成的report的解析，有的显示xml或json的报告也挺友好的。这里不说直接使用junit和mochawesome这两个简单report，而是按照文章中所说，将失败结果放到报告里，主要思路是：
+1. 生成json的报告，每个spec文件是一份报告
+2. 把生成的众多report合并成一个json的报告
+3. 把这个合并的json的报告生成一个html的报告
+4. 对于失败的用例，把产生的截图内嵌到报告中
