@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cy:run": "cypress run --spec 'cypress/integration/*.spec.js'",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --spec cypress/integration/retry.spec.js",
     "report:merge": "mochawesome-merge cypress/results/json/*.json > cypress/results/mochawesome-bundle.json",
     "report:generate": "marge cypress/results/mochawesome-bundle.json -o cypress/reports/html",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -90,8 +90,14 @@ cy.get('.todo-list li')     // command
     expect($li.get(1).textContent, 'second item').to.equal('todo B')   //C
   })
 ```
-并行线程
-* Tag用例管理
+
+## 并行线程
+当有多个机器支持并行运行测试时，cypress有个很好的点是，内部有一个平衡策略，会根据每个spec历史运行的时间来预估它下一次会运行多久，然后进行机器的分配。
+
+## Hook && Group测试用例
+1. Cypress基于Mocha，所以可以使用常见的Hook，Before，After，beforeEach，afterEach等
+2. 在开启了record功能后，可以使用group功能将测试分组。
+3. Tag管理用例的功能(还未实现)[https://github.com/cypress-io/cypress/issues/1865]
 
 ## CI/CD流水线
 测试在CI上集成核心是**命令行运行走天下**，其实跟在本地跑没有区别，额外需要了解的知识就是一些CI的基础理论知识，另外，有的测试代码也是需要编译和构建的，相对麻烦些，cypress和其他js类型的自动化框架没有这个问题。[这里](https://docs.cypress.io/guides/guides/continuous-integration.html#Examples)的几个流行CI工具的yaml文件中可以看出，在运行测试的时候，都是用的**$(npm bin)/cypress run --record**命令。
@@ -101,7 +107,7 @@ cy.get('.todo-list li')     // command
 ## 生成测试报告
 [参考](https://medium.com/egnyte-engineering/3-steps-to-awesome-test-reports-with-cypress-f4fe915bc246)
 
-cypress是基于mocha的，所以mocha可以用的reporter，cypress都可以用，对于E2E来说，漂亮的report也是挺必要的，不过也得看CI对生成的report的解析，有的显示xml或json的报告也挺友好的。这里不说直接使用junit和mochawesome这两个简单report，而是按照文章中所说，将失败结果放到报告里，主要思路是：
+cypress是基于mocha的，所以mocha可以用的reporter，cypress都可以用，对于E2E来说，漂亮的report也是挺必要的，不过也得看CI对生成的report的解析，有的显示xml或json的报告也挺友好的。这里不说直接使用junit和mochawesome这两个简单report，而是按照文章中所说，一个带有失败用例截图的report，主要思路是：
 1. 生成json的报告，每个spec文件是一份报告
 2. 把生成的众多report合并成一个json的报告
 3. 把这个合并的json的报告生成一个html的报告

@@ -1,8 +1,13 @@
 {
-  "baseUrl": "https://www.thoughtworks.com/",
+  "baseUrl": "https://www.thoughtworks.com",
+  "env": {
+    "test": "https://www.thoughtworks.com",
+    "release": "https://www.google.com"
+  },
   "reporter": "cypress-multi-reporters",
   "reporterOptions": {
     "configFile": "./reporter-config.json"
   },
-  "screenshotsFolder": "cypress/reports/html/screenshots"
+  "screenshotsFolder": "cypress/reports/html/screenshots",
+  "projectId": "m6gs74"
 }
