@@ -1,7 +1,7 @@
+@Smoke
 Feature: Is it Friday yet?
   Everybody wants to know when it's Friday
 
+  @first
   Scenario: Sunday isn't Friday
-    Given today is Sunday
-    When I ask whether it's Friday yet
-    Then I should be told "Nope"
+    Given Open home page of baidu
