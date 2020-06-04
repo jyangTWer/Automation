@@ -1,0 +1,6 @@
+n#Oojbvin+7DK)3$G}Um#
+# https://help.github.com/articles/dealing-with-line-endings/
+#
+# These are explicitly windows files and should use crlf
+*.bat           text eol=crlf
+
