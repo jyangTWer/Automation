@@ -8,3 +8,4 @@ cypress/cypress-example-todomvc
 cypress/cypress/reports/
 cypress/cypress/results/
 cypress/cypress/videos/
+karate/.idea/
