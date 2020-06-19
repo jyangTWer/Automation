@@ -3,6 +3,14 @@
 * 包管理器：npm，整个nodeJs平台的包管理器，用来管理不同工具的安装，卸载以及自动解决依赖包的冲突等等。6.14.4
 * 安装：```npm install cypress```
 
+## 运行
+文件package.json里有个scripts部分，这里边可以写一些常用的运行测试的命令，配合不同的参数有不同的目的，这样配置之后，在命令行里：
+npm run cy:open 启动cypress的Runner。
+npm run cy:run 运行retry.spec.js
+npm run report:merge 运行所有spec测试之后，每个测试会生成一个单独的json报告，因为cypress是基于mocha的，所以报告是真不怎么地，这里需要用mochawesome-merge将所有生成的结果json合并成一个json文件。
+npm run report:generate 将合成后的最终的json文件再转成html报告。
+
+
 ## 例子 - Simple，PageObject，Command，Application Action
 * 第一个例子，进入TW首页，搜索BDD关键字，查到相关文章。
 * 第二个例子，把第一个例子用PO的方式改写。
@@ -112,3 +120,9 @@ cypress是基于mocha的，所以mocha可以用的reporter，cypress都可以用
 2. 把生成的众多report合并成一个json的报告
 3. 把这个合并的json的报告生成一个html的报告
 4. 对于失败的用例，把产生的截图内嵌到报告中
+
+##密码管理
+现在公司都越来越重视安全了，所以密码这些都在相对安全的地方管理着，那对于测试来说，运行的时候也需要这些账户信息，有两种办法：
+1. 有的CI工具上支持secure_variable,可以把账户信息用CI工具的特殊API进行加密，然后在CI上把这些加密过的信息作为变量传进去，工具在使用的时候自动解密，可以参考[GOCD](https://github.com/tomzo/gocd-yaml-config-plugin/blob/master/README.md#pipeline)中的secure_variables，还有这个[加密的API](https://api.gocd.org/current/#encrypt-a-plain-text-value)。
+
+2. 就是跟已知的管理工具集成，用它带的SDK去把账户信息取回来，这个未完待续。
