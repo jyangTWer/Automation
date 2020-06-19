@@ -29,6 +29,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.0'
+
+    testImplementation 'com.alibaba:fastjson:1.2.70'
 }
 
 application {
@@ -37,8 +39,7 @@ application {
 }
 
 test {
-    // Use junit platform for unit tests
     useJUnitPlatform() {
-        includeTags "Smoke"
+        includeTags("Smoke")
     }
 }

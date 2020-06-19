@@ -1,58 +1,91 @@
 package ApiTest;
 
+import com.alibaba.fastjson.JSON;
 import io.restassured.RestAssured;
-import static io.restassured.RestAssured.basic;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.jupiter.api.*;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ApiTest {
   @BeforeAll
   private static void baseUrl() {
-    RestAssured.baseURI = "baseurl";
-    RestAssured.authentication = basic("username", "password");
+    RestAssured.baseURI = "https://petstore.swagger.io/v2";
   }
 
   @Test
-  @DisplayName("Normal API")
-  public void normalTest() {
-    given().
-        param("version", "3.5.0").
-        param("platform", "android").
-    when().
-        get("/api/reading/index").
-    then().
-        body("data.essay.content_id", hasItems("4340", "4337"));
-  }
-
-  @Test
-  @DisplayName("pathParam")
-  @Tag("Smoke1")
-  public void pathParam() {
-    given().
-        pathParam("essayId", 3395).
-        param("version", "3.5.0").
-        param("platform", "android").
-    when().
-        get("/api/comment/praiseandtime/essay/{essayId}/0").
-    then().
-        body("data.count", equalTo(621));
-  }
-
-  @Test
-  @DisplayName("header")
+  @DisplayName("Get pet by id")
   @Tag("Smoke")
-  public void header() {
+  public void GetPet() {
     given().
-            header("Accept", "application/json").
-            param("version", "3.5.0").
-            param("platform", "android").
+        header("Accept", "application/json").
     when().
-            get("/api/comment/praiseandtime/essay/3395/0").
+        get("/pet/111222333").
     then().
-            assertThat().
-            body("data.count", equalTo(621));
+        body("category.name", equalTo("maomao"));
+  }
+
+  @Test
+  @DisplayName("post pet")
+  @Tag("Smoke")
+  public void AddNewPet() {
+    String body = "{\"id\":111222333,\"category\":{\"id\":0,\"name\":\"maomao\"},\"name\":\"doggie\",\"photoUrls\":[\"https://ichef.bbci.co.uk/news/660/cpsprodpb/AAE7/production/_111515734_gettyimages-1208779325.jpg\"],\"tags\":[{\"id\":0,\"name\":\"Sweet\"}],\"status\":\"available\"}";
+
+    given().
+            header("Content-Type", "application/json").
+            header("accept", "application/json").
+            body(body).
+    when().
+            post("/pet").
+    then().
+            statusCode(200).
+            body("category.name", equalTo("maomao"));
+  }
+
+  @Test
+  @DisplayName("post pet by hashMap")
+  @Tag("Smoke")
+  public void AddNewPetAgain() {
+    Map<String, Object> jsonAsMap = new HashMap<>();
+    jsonAsMap.put("id", "111222334");
+    jsonAsMap.put("status", "available");
+    jsonAsMap.put("category", new HashMap<String, String>() {{
+      put("id", "0");
+      put("name", "maomao");
+    }});
+    jsonAsMap.put("name", "doggie");
+    jsonAsMap.put("photoUrls", new String[]{"\"https://ichef.bbci.co.uk/news/660/cpsprodpb/AAE7/production/_111515734_gettyimages-1208779325.jpg\""});
+    jsonAsMap.put("tags", Arrays.asList(new HashMap<String, String>() {{
+      put("id", "0");
+      put("name", "Sweet");
+    }}));
+
+    given().
+        header("Content-Type", "application/json").
+        header("accept", "application/json").
+        body(JSON.toJSONString(jsonAsMap)).
+    when().
+        post("/pet").
+    then().
+        statusCode(200).
+        body("category.name", equalTo("maomao"));
+  }
+
+  @Test
+  @DisplayName("Delete pet by id")
+  @Tag("Smoke")
+  public void DeletePet() {
+    given().
+            header("accept", "application/json").
+            pathParam("petid", "111222334").
+    when().
+            post("/pet/{petid}").
+    then().
+            statusCode(200).
+            body("message", equalTo("111222334"));
   }
 }
