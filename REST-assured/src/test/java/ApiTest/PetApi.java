@@ -3,18 +3,39 @@ package ApiTest;
 import com.alibaba.fastjson.JSON;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
+//import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import io.restassured.common.mapper.TypeRef;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ApiTest {
+public class PetApi {
   @BeforeAll
   private static void baseUrl() {
     RestAssured.baseURI = "https://petstore.swagger.io/v2";
+  }
+
+  @Test
+  @DisplayName("Get pets by status")
+  @Tag("IntegerationTest")
+  @Tag("Smoke12")
+  public void GetPets() {
+    Response response = given().
+            header("Accept", "application/json").
+            param("status", "available").
+    when().
+            get("/pet/findByStatus");
+
+    List<Map<String, Object>> pets = response.body().as(new TypeRef<>() {
+    });
+    assertThat(pets.size(), greaterThan(187));
   }
 
   @Test
@@ -77,6 +98,7 @@ public class ApiTest {
 
   @Test
   @DisplayName("Delete pet by id")
+  @Tag("Smoke12")
   @Tag("Smoke")
   public void DeletePet() {
     given().

@@ -9,6 +9,11 @@
 2. 这两天不知道抽什么风，突然IDE里运行测试就No tests found了，还有Test events were not received, 找了2天，才发现[这个](https://www.timbotetsu.com/blog/intellij-idea-unit-test-test-events-were-not-received/)，
 原来是2019.2.1版开始Intellij IDEA用gradle来跑测试，换成IDEA的Runner是工作的，但是疑问是，就想用Gradle来跑测试，该怎么处理呢? 还没找到解决办法。
 
-## ApiTest.java里
+## PetApi.java里
 所有的API请求都是来自Swagger Editor，有很多API，大家可以自由练习，另外还有一个更新在[这里](https://www.cnblogs.com/arhatJing/p/13156411.html).
 
+## Report
+在build.gradle里配置了report的目录位置，#47和#48行
+
+## Tag/Filter
+build.gradle里#52行配置过滤用例

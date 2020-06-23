@@ -21,6 +21,12 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    testImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.2'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    testImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.2'
+
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
 
@@ -38,8 +44,14 @@ application {
     mainClassName = 'ApiTest.App'
 }
 
+reporting.baseDir = "$buildDir/reports"
+testResultsDirName = "$buildDir/test-results"
+
 test {
     useJUnitPlatform() {
-        includeTags("Smoke")
+        includeTags 'Smoke'
+        excludeTags 'Smoke12'
+        includeEngines 'junit-jupiter'
+//        excludeTags("Smoke123")
     }
 }
