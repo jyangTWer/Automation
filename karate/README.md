@@ -20,7 +20,13 @@ mvn archetype:generate \
 * 方法二：看这个[视频](https://www.youtube.com/watch?v=W-af7Cd8cMc&feature=youtu.be) 会更直观。
 
 ## 运行
-在pop.xml所在的文件内运行```mvn test```，就可以看到有测试在运行以及最后生成html report。运行时可能会因为按照id取Pet时超时失败。
+```mvn test```
+
+在pop.xml文件所在路径下执行，就可以看到有测试在运行以及最后生成html report。运行时可能会因为按照id取Pet时超时失败。
+
+```mvn test -DargLine="-Dkarate.env=test"```
+
+通过设置env在karate-config.js中配置不同环境的API hostname。每次跑测试时都会先读取这个config配置文件的。
 
 ## 规范
 在建好之后你会发现部分文件结构入有users目录，有users.feature和UsersRunner.java两个文件，与users并列还有一个ExamplesTest.java文件，
